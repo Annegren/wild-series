@@ -1,4 +1,13 @@
+@import "~bootstrap/scss/bootstrap";
+
 body {
-    background-color:red;
+    background-color: bisque;
 
 }
+
+$theme-colors: (
+  "primary": yellow,
+  "danger": #ff4136
+);
+
+

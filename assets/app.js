@@ -22,4 +22,9 @@ require('bootstrap');
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
+
 });
+
+console.log('Hello Webpack Encore !')
+
+
