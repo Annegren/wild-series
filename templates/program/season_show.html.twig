@@ -11,7 +11,7 @@
 </div>     
     <ul class="list-group text-center">
     {% for episode in episodes %}
-        <li class="list-group-item m-3">Episode {{ episode.number }} : {{ episode.title }}</li>
+        <a href="{{ path("program_episode_show", { program_id: program.id, season_id: season.id, episode_id: episode.id }) }}"><li class="list-group-item m-3">Episode {{ episode.number }} : {{ episode.title }}</li></a>
        <p>{{ episode.synopsis }}</p>
     {% else %}
       <li class="list-group-item ">Aucun épisode trouvé.</li>
