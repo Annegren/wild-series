@@ -17,7 +17,7 @@ class ProgramType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('summary', TextareaType::class)
-            ->add('poster', TextType::class)
+            ->add('poster', TextType::class )
             ->add('year', TextType::class)
             ->add('country', TextType::class)
             ->add('category',  null, ['choice_label' => 'name'])

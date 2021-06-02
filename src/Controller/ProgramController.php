@@ -23,6 +23,7 @@ class ProgramController extends AbstractController
 
 /**
  * @Route("/", name="index")
+ * @return Response A response instance
  */
     public function index(): Response
     {
@@ -44,7 +45,8 @@ class ProgramController extends AbstractController
 
         $form = $this->createForm(ProgramType::class, $program);
         $form->handleRequest($request);
-        if ($form->isSubmitted()) {
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($program);
@@ -54,13 +56,18 @@ class ProgramController extends AbstractController
             return $this->redirectToRoute('program_index');
         }
 
-        return $this->render('program/new.html.twig', ["form" => $form->createView()]);
+        return $this->render('program/new.html.twig', [
+            "form" => $form->createView()]);
     }
 
 
 
+
     /**
-     * @Route ("/{id}", requirements={"id"="\d+"}, methods={"GET"}, name="show")
+     * Getting a program by id
+     * 
+     * @Route("/show/{id<^[0-9]+$>}", name="show")
+     * @return Response
      */
     public function show(Program $program): Response
     {
@@ -97,13 +104,13 @@ class ProgramController extends AbstractController
      * @ParamConverter("season", class="App\Entity\Season", options={"mapping": {"season_id": "id"}})
      * @ParamConverter("episode", class="App\Entity\Episode", options={"mapping": {"episode_id": "id"}})
      */
-    public function showEpisode(Program $program, Season $season, Episode $episode): Response
+    public function showEpisode(Program $programId, Season $seasonId, Episode $episodeId): Response
     {
 
         return $this->render('program/episode_show.html.twig', [
-            'program' => $program,
-            'season' => $season,
-            'episode' => $episode,
+            'program' => $programId,
+            'season' => $seasonId,
+            'episode' => $episodeId,
         ]);
     }
 }

@@ -6,9 +6,15 @@ use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
+ * @UniqueEntity("title", message="cette série existe déjà !")
  */
 class Program
 {
@@ -18,17 +24,30 @@ class Program
      * @ORM\Column(type="integer")
      */
     private $id;
+   
+    
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
+    /** 
+    * @ORM\Column(type="string", length=255, unique=true)
+    * @Assert\NotBlank(message="Veuillez ajouter le titre")
+    * @Assert\Length(max="255", maxMessage="Le titre doit comporter maximum 255 caractères.")
+    */
     private $title;
 
-    /**
+     
+    
+    
+    
+     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Le synopsis est vide.")
+     * @Assert\Regex(pattern="[plus belle la vie]", match=false, message="On parle de vraie serie ici.")
      */
     private $summary;
 
+    
+    
+    
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -42,13 +61,21 @@ class Program
     private $category;
     
     
-    /**
+    
+     /**
      * @ORM\Column(type="string", length=255)
      */
     private $country;
 
+    
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Type(
+     *     type="integer",
+     *     message="Vous devez saisir un nombre."
+     * )
+     * @Assert\NotBlank(message="ne me laisse pas tout vide")
+     * @Assert\Positive
      */
     private $year;
 
