@@ -3,7 +3,7 @@
 {% block title %}Toutes les catégories {% endblock %}
 
 {% block body %}
-    <h1>Toutes les Catégories de la table category : </h1>
+    <h1>Toutes les Catégories : </h1>
     {% for category in categories %}
         <div>
             <a href="{{ path("category_show", { categoryName: category.name }) }}"><h2>{{ loop.index }} / Catégorie : {{ category.name }} </h2></a>
@@ -12,8 +12,11 @@
         Aucune Catégorie trouvée.
     {% endfor %}
 
-    <a href="{{ path('app_index') }}">
-        Retour à l'accueil
-    </a>
-    <a href="{{ path('category_new') }}">Ajouter une categorie</a>
+    <div class="form-group form-style">
+   <button type="submit" class="btn btn-secondary" name="submit"><a href="{{ path('app_index') }}">Retour à l'accueil</a></button>
+   </div>
+    </br>
+     <div class="form-group form-style">
+        <button type="submit" class="btn btn-secondary" name="submit"><a href="{{ path('category_new') }}">Ajouter une categorie</a></button>
+     </div>
 {% endblock %}
