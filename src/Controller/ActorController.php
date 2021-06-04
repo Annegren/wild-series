@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Actor;
-use App\Form\ActorType;
 use App\Repository\ActorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
