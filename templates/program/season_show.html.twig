@@ -11,12 +11,12 @@
 </div>     
     <ul class="list-group text-center">
     {% for episode in episodes %}
-        <a href="{{ path("program_episode_show", { program_id: program.id, season_id: season.id, episode_id: episode.id }) }}"><li class="list-group-item m-3">Episode {{ episode.number }} : {{ episode.title }}</li></a>
+        <a href="{{ path("program_episode_show", { program_slug: program.slug, season_id: season.id, episode_slug: episode.slug }) }}"><li class="list-group-item m-3">Episode {{ episode.number }} : {{ episode.title }}</li></a>
        <p>{{ episode.synopsis }}</p>
     {% else %}
       <li class="list-group-item ">Aucun épisode trouvé</li>
     {% endfor %}
-    <a href="{{ path("program_show", { id: program.id }) }}">
+    <a href="{{ path("program_show", { slug: program.slug }) }}">
       Retour à la fiche du programme
     </a>
     </ul>

@@ -17,7 +17,7 @@ class SeasonFixtures extends Fixture implements DependentFixtureInterface
 
     public function load(ObjectManager $manager)
     {
-        foreach (self::SEASONS as $key => $seasons) {
+        foreach (self::SEASONS as $key => $season) {
             $season = new Season();
             $season->setProgram($this->getReference('program_0'));
             $season->setNumber(1);

@@ -5,20 +5,7 @@
 {% block body %}
 
 {% if programs %}
-    <h1 class="mb-5">Voici les 3 dernières séries de la catégorie :
-      {{ categories.name }}
-    </h1>
-    {% for program in programs %}
-    <div class="mb-5">
-      <h2>{{ program.id }} /
-        <a href="{{path("program_show", { id: program.id }) }}">{{ program.title }}</a>
-      </h2>
-      <p>{{ program.summary }}</p>
-    </div>
-    {% else %}
-    aucune série trouvée
-    {% endfor %}
-
+  
  <div class="container-fluide text-center">
       <div class="row">
         <h1 class="mb-5">Les dernières séries de la catégorie :
@@ -30,7 +17,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{ program.title }}</h5>
                 <p class="card-text">{{ program.summary }}</p>
-                <a href="{{ path("program_show", { id: program.id }) }}" class="btn btn-primary">Voir la fiche</a>
+                <a href="{{ path("program_show", { slug: program.slug }) }}" class="btn btn-primary">Voir la fiche</a>
               </div>
             </div>
   {% else %}

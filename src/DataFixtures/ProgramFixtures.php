@@ -6,10 +6,19 @@ use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use App\Service\Slugify;
 
 
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    private $input;
+
+    public function __construct(Slugify $input)
+    {
+        $this->input = $input;
+    }
+
 
     const PROGRAMS =[
         'Walking dead',
@@ -27,6 +36,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
         $program = new Program();
         $program->setTitle($title);
+        $program->setSlug($this->input->generate($program->getTitle()));
         $program->setSummary('Des zombies envahissent la terre');
         $program->setCategory($this->getReference('category_4'));
         $program->setYear(2001); 
@@ -50,5 +60,6 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
           CategoryFixtures::class,
         ];
     }
+
 
 }

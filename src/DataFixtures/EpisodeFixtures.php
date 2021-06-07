@@ -6,15 +6,24 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Episode;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use App\Service\Slugify;
 
 class EpisodeFixtures extends Fixture implements DependentFixtureInterface
 {
+
+    private $input;
+
+    public function __construct(Slugify $input)
+    {
+        $this->input = $input;
+    }
+
     const EPISODES = [
-        'episode1',
-        'episode2',
-        'episode3',
-        'episode4',
-        'episode5',
+        'episode 1',
+        'episode 2',
+        'episode 3',
+        'episode 4',
+        'episode 5',
     ];
 
     public function load(ObjectManager $manager)
@@ -22,6 +31,8 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         foreach (self::EPISODES as $key => $episodes) {
             $episode = new Episode();
             $episode->setTitle($episodes);;
+            $episode->setSlug($this->input->generate($episode->getTitle()));
+
             $episode->setSeason($this->getReference('season_0'));
             $episode->setNumber($key);
             $episode->setSynopsis('Synopsis Des zombies envahissent la terre');

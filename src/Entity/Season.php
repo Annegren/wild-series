@@ -45,6 +45,9 @@ class Season
      */
     private $episodes;
 
+
+
+
     public function __construct()
     {
         $this->episodes = new ArrayCollection();
@@ -132,4 +135,9 @@ class Season
 
         return $this;
     }
+
+    
+    
+    
+    
 }
