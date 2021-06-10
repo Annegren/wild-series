@@ -12,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
+use App\Entity\Comment;
+use App\Form\CommentType;
+
 
 
 /**
@@ -48,7 +51,7 @@ class EpisodeController extends AbstractController
             $entityManager->flush();
             $email = (new Email())
             ->from($this->getParameter('mailer_from'))
-            ->to('your_email@example.com')
+            ->to(' your_email@example.com')
             ->subject('Une nouvelle série vient d\'être publiée !')
             ->html($this->renderView('episode/newEpisodeEmail.html.twig', [
                 'episode' => $episode,
@@ -69,10 +72,23 @@ class EpisodeController extends AbstractController
     /**
      * @Route("/{slug}", name="episode_show", methods={"GET"})
      */
-    public function show(Episode $episode): Response
+    public function show(Episode $episode, Request $request): Response
     {
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setAuthor($this->getUser());
+            $comment->setEpisode($episode);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+        }
+
         return $this->render('episode/show.html.twig', [
             'episode' => $episode,
+            'form' => $form->createView(),
         ]);
     }
 

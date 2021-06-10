@@ -63,13 +63,13 @@ class Program
     
     
      /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $country;
 
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type(
      *     type="integer",
      *     message="Vous devez saisir un nombre."

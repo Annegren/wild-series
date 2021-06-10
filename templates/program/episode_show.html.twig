@@ -8,5 +8,22 @@
     <h2> Saison {{ season.number }} </h2>
     <p> Episode {{ episode.number }} / {{ episode.title }} </p>
     <p>{{ episode.synopsis }}</p>
-</div>     
+    {% if app.user %}
+			<h3 class="mt-3">Add a comment</h3>
+			<div class="text-center mt-3">
+				{{ form_start(form) }}
+				{{ form_widget(form) }}
+				<input type='submit' value='Add comment'>
+                {{ form_end(form) }}
+			</div>
+	{% endif %}
+		<h3 class="mt-5">Comments</h3>
+		{% for comment in episode.comments | reverse %}
+            <h4 class"mt-3">Par
+				{{comment.author.username}}</h4>
+			<p>{{comment.comment}}</p>
+			<p>Rate : {{comment.rate}}</p>
+		{% endfor %}
+		    <a href="{{ path('app_index') }}"> Retour à l'accueil </a>
+    </div>     
 {% endblock %} 
