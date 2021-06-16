@@ -19,6 +19,11 @@
                 <div class="text-center">
                       <h5 class="card-title">{{ program.title }}</h5>
                         <p class="card-text">{{ program.summary }}</p> 
+                        {% if is_granted("ROLE_ADMIN") %}
+
+				<a class="btn border" href="{{ path('program_edit', { 'slug': program.slug} ) }}">Éditer</a>
+
+			{% endif %}
                 </div>
                   <a href="{{ path("program_show", { slug: program.slug }) }}" class="btn btn-primary">Voir la fiche</a>
                 </div>

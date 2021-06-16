@@ -40,6 +40,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         $program->setSummary('Des zombies envahissent la terre');
         $program->setCategory($this->getReference('category_4'));
         $program->setYear(2001); 
+        $program->setOwner($this->getReference('admin'));
         $program->addActor($this->getReference('actor_0'));
         $program->addActor($this->getReference('actor_1'));
         $program->addActor($this->getReference('actor_2'));
@@ -58,6 +59,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         return [
           ActorFixtures::class,
           CategoryFixtures::class,
+          UserFixtures::class,
+
         ];
     }
 
