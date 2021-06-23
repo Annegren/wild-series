@@ -19,25 +19,25 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
     }
 
     const EPISODES = [
-        'episode 1',
-        'episode 2',
-        'episode 3',
-        'episode 4',
-        'episode 5',
+        ['title' => 'Episode 1', 'number' => 1, 'summary' => 'Synopsis'],
+        ['title' => 'Episode 2', 'number' => 2, 'summary' => 'Synopsis'],
+        ['title' => 'Episode 3', 'number' => 3, 'summary' => 'Synopsis'],
+        ['title' => 'Episode 4', 'number' => 4, 'summary' => 'Synopsis'],
+        ['title' => 'Episode 5', 'number' => 5, 'summary' => 'Synopsis']
+        
+    
     ];
 
     public function load(ObjectManager $manager)
     {
-        foreach (self::EPISODES as $key => $episodes) {
+        foreach (self::EPISODES as $row => $value) {
             $episode = new Episode();
-            $episode->setTitle($episodes);;
-            $episode->setSlug($this->input->generate($episode->getTitle()));
-
+            $episode->setTitle($value['title']);
+            $episode->setSlug($this->input->generate($episode->getTitle($value['title'])));
             $episode->setSeason($this->getReference('season_0'));
-            $episode->setNumber($key);
-            $episode->setSynopsis('Synopsis Des zombies envahissent la terre');
+            $episode->setNumber($value['number']);
+            $episode->setSynopsis($value['summary']);
             $manager->persist($episode);
-            $this->addReference('episode_' . $key, $episode);
         }  
 
         $manager->flush();

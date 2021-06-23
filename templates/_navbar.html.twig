@@ -2,10 +2,10 @@
   <div class="container-fluid">
     <a class="navbar-brand" href="assets/images/PopCorn.png"> </a>
      <ul class="nav-item active">
-   <a class="nav-link" href="/">Home</a>
+   <a class="nav-link" href="/">Accueil</a>
  </ul>
   <ul class="nav-item">
-   <a class="nav-link" href="/programs/">Programes</a>
+   <a class="nav-link" href="/programs/">Programmes</a>
  </ul>
  </li>
  <ul class="nav-item">
@@ -14,14 +14,18 @@
  <ul>
  {% if app.user %}
     {{ app.user.email }}
+    <div class="text-end">
     <a href="{{ path('app_logout') }}"> Se déconnecter</a>
+    </div>
+    <a class="nav-link" href="{{ path('app_profile') }}">Mon compte</a>
 {% else %}
     <a href="{{ path('app_login') }}"> Se connecter</a>
+    <a class="nav-link" href="{{ path('app_register') }}">Créer un compte</a>
 {% endif %}
 </ul>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+    
+    
+    
     </form>
   </div>
 </nav>

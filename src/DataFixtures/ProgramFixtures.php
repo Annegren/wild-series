@@ -21,32 +21,30 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
 
     const PROGRAMS =[
-        'Walking dead',
-        'Friends',
-        'Le Prince de Bel Air',
-        'Hartley Coeurs à vifs',
-        'Superman', 
-        'Charmed'
-        
+        ['title' => 'walking dead', 'summary' => 'Résumé', 'poster' => 'Une image ici', 'year' => '1990', 'country' => 'USA'],
+        ['title' => 'Friends', 'summary' => 'Résumé', 'poster' => 'Une image ici', 'year' => '1900', 'country' => 'USA'],
+        ['title' => 'Le Prince de Bel Air', 'summary' => 'Résumé', 'poster' => 'Une image ici', 'year' => '1990', 'country' => 'USA'],
+        ['title' => 'Superman', 'summary' => 'Résumé', 'poster' => 'Une image ici', 'year' => '1990', 'country' => 'USA'],
+        ['title' => 'charmed', 'summary' => 'Résumé', 'poster' => 'Une image ici', 'year' => '2018', 'country' => 'USA'],
     ];
+
+
+    
 
     public function load(ObjectManager $manager)
     {
-        foreach (self::PROGRAMS as $key => $title) {
+        foreach (self::PROGRAMS as $row => $value) {
 
         $program = new Program();
-        $program->setTitle($title);
-        $program->setSlug($this->input->generate($program->getTitle()));
-        $program->setSummary('Des zombies envahissent la terre');
-        $program->setCategory($this->getReference('category_4'));
-        $program->setYear(2001); 
-        $program->setOwner($this->getReference('admin'));
-        $program->addActor($this->getReference('actor_0'));
-        $program->addActor($this->getReference('actor_1'));
-        $program->addActor($this->getReference('actor_2'));
-        $program->addActor($this->getReference('actor_3'));
+        $program->setTitle($value['title']);
+        $program->setSlug($this->input->generate($value['title']));
+        $program->setSummary($value['summary']);
+        $program->setPoster($value['poster']);
+        $program->setCategory($this->getReference('category_0'));
+        $program->setYear($value['year']);
+        $program->setOwner($this->getReference('admin'));        
         $manager->persist($program);
-        $this->addReference('program_' . $key, $program);
+        $this->addReference('program_' . $row, $program);
         
         }
 

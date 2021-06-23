@@ -3,20 +3,44 @@
 {% block title %}Toutes les catégories {% endblock %}
 
 {% block body %}
+    <div class="mb-5 mt-5 text-center">
     <h1>Toutes les Catégories : </h1>
+    </div>
     {% for category in categories %}
-        <div>
-            <a href="{{ path("category_show", { categoryName: category.name }) }}"><h2>{{ loop.index }} / Catégorie : {{ category.name }} </h2></a>
+        <div class="mb-3 text-center">
+
+            <a href="{{ path("category_show", { categoryName: category.name }) }}"><h5>{{ loop.index }} / Catégorie : {{ category.name }} </h5></a>
         </div>
     {% else %}
         Aucune Catégorie trouvée.
     {% endfor %}
 
-    <div class="form-group form-style">
-   <button type="submit" class="btn btn-secondary" name="submit"><a href="{{ path('app_index') }}">Retour à l'accueil</a></button>
-   </div>
-    </br>
-     <div class="form-group form-style">
-        <button type="submit" class="btn btn-secondary" name="submit"><a href="{{ path('category_new') }}">Ajouter une categorie</a></button>
-     </div>
+<div class="p-5 text-center">
+<button type="button" class="btn btn-light"><a href="{{ path('category_new') }}">Ajouter une categorie</a></button>
+</div>
+<div class="mb-5 text-end">
+    <button type="button" class="btn btn-light"><a href="{{ path('app_index') }}">Retour à l'accueil</a></button>
+</div>
+
+
+
+    
+    
+    
+    
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
